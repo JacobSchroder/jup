@@ -1,0 +1,15 @@
+package templates
+
+templ CommentPosted(comment string){
+    <div id="comment-posted-msg">
+        <div class="text-xl text-green-600">
+            Success!
+        </div>
+        {comment}
+        <div>
+            <button hx-get="/comment-form" hx-target="#comment-posted-msg" hx-swap="outerHTML">
+                New comment
+            </button>
+        </div>
+    </div>
+}
