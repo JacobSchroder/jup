@@ -3,3 +3,4 @@ bin
 tmp
 tailwindcss
 static/css/out/**
+**/*_templ.txt
