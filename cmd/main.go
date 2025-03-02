@@ -5,11 +5,18 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
+	"net"
 	"net/http"
 	"os"
 	"os/signal"
+
+	"github.com/JacobSchroder/jup/internal/server"
 )
-	
+
+const (
+	host = "localhost"
+	port = "8082"
+)
 
 func run(ctx context.Context, w io.Writer) error {
 	ctx, cancel := signal.NotifyContext(ctx, os.Interrupt)
@@ -18,10 +25,14 @@ func run(ctx context.Context, w io.Writer) error {
 	logger := slog.New(slog.NewJSONHandler(w, nil))
 	slog.SetDefault(logger)
 
-	fs := http.FileServer(http.Dir("./static"))
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	serv := server.Server()
+	httpServer := &http.Server{
+		Addr: net.JoinHostPort(host, port),
+		Handler: serv,
+	}
 
-	err := http.ListenAndServe(":3000", nil)
+	err := httpServer.ListenAndServe()
+
 	if err != nil {
 		slog.Error(err.Error())
 	}

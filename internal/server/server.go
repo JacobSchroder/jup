@@ -13,7 +13,7 @@ type Config struct {
 func Server() http.Handler {
 	mux := http.NewServeMux()
 
-	// addRoutes()
+	AddRoutes(mux)
 	var handler http.Handler = mux
 
 	return handler
