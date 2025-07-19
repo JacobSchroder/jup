@@ -6,11 +6,11 @@ templ header(title string) {
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<script src="https://unpkg.com/htmx.org@2.0.4"></script>
-		<link rel="stylesheet" href="/static/css/out/style.css" />
+		<link rel="stylesheet" href="/assets/css/out/style.css"/>
 		// if os.Getenv("env") == "production" {
-		// 	<link rel="stylesheet" href="/static/css/style.min.css" nonce={ middleware.GetTwNonce(ctx) }/>
+		// 	<link rel="stylesheet" href="/assets/css/style.min.css" nonce={ middleware.GetTwNonce(ctx) }/>
 		// } else {
-		// 	<link rel="stylesheet" href="/static/css/style.css" nonce={ middleware.GetTwNonce(ctx) }/>
+		// 	<link rel="stylesheet" href="/assets/css/style.css" nonce={ middleware.GetTwNonce(ctx) }/>
 		// }
 	</head>
 }

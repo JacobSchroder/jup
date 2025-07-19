@@ -1,0 +1,7 @@
+{
+  "componentsDir": "components",
+  "utilsDir": "utils",
+  "moduleName": "github.com/JacobSchroder/jup",
+  "jsDir": "assets/js",
+  "jsPublicPath": "/assets/js"
+}

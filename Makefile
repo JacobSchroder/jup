@@ -14,11 +14,11 @@ test:
 
 .PHONY: tailwind-watch
 tailwind-watch:
-	./tailwindcss -i ./static/css/input.css -o ./static/css/out/style.css --watch
+	./tailwindcss -i ./assets/css/input.css -o ./assets/css/out/style.css --watch
 
 .PHONY: tailwind-build
 tailwind-build:
-	./tailwindcss -i ./static/css/input.css -o ./static/css/out/style.min.css --minify
+	./tailwindcss -i ./assets/css/input.css -o ./assets/css/out/style.min.css --minify
 
 .PHONY: templ-watch
 templ-watch:
@@ -27,7 +27,7 @@ templ-watch:
 .PHONY: templ-generate
 templ-generate:
 	templ generate
-	
+
 .PHONY: dev
 dev:
 	go build -o ./tmp/main ./cmd/main.go && air
