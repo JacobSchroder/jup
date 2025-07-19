@@ -12,6 +12,9 @@ func AddRoutes(
 
 	mux.HandleFunc("GET /{$}", handlers.HandleGetIndex)
 
+	mux.HandleFunc("GET /login", handlers.HandleGetLogin)
+	mux.HandleFunc("POST /login", handlers.HandlePostLogin)
+
 	mux.HandleFunc("POST /comment", handlers.HandlePostComment)
 	mux.HandleFunc("GET /comment-form", handlers.HandleGetPostCommentForm)
 

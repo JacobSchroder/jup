@@ -1,11 +1,56 @@
 package templates
 
+import (
+	"github.com/JacobSchroder/jup/components/avatar"
+	"github.com/JacobSchroder/jup/components/calendar"
+	"github.com/JacobSchroder/jup/components/carousel"
+	"github.com/JacobSchroder/jup/components/chart"
+	"github.com/JacobSchroder/jup/components/code"
+	"github.com/JacobSchroder/jup/components/datepicker"
+	"github.com/JacobSchroder/jup/components/drawer"
+	"github.com/JacobSchroder/jup/components/dropdown"
+	"github.com/JacobSchroder/jup/components/input"
+	"github.com/JacobSchroder/jup/components/inputotp"
+	"github.com/JacobSchroder/jup/components/label"
+	"github.com/JacobSchroder/jup/components/modal"
+	"github.com/JacobSchroder/jup/components/popover"
+	"github.com/JacobSchroder/jup/components/progress"
+	"github.com/JacobSchroder/jup/components/rating"
+	"github.com/JacobSchroder/jup/components/selectbox"
+	"github.com/JacobSchroder/jup/components/slider"
+	"github.com/JacobSchroder/jup/components/tabs"
+	"github.com/JacobSchroder/jup/components/tagsinput"
+	"github.com/JacobSchroder/jup/components/textarea"
+	"github.com/JacobSchroder/jup/components/toast"
+)
+
 templ header(title string) {
 	<head>
 		<title>{ title }</title>
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+		@avatar.Script()
+		@calendar.Script()
+		@carousel.Script()
+		@chart.Script()
+		@code.Script()
+		@datepicker.Script()
+		@drawer.Script()
+		@dropdown.Script()
+		@input.Script()
+		@inputotp.Script()
+		@label.Script()
+		@modal.Script()
+		@popover.Script()
+		@progress.Script()
+		@rating.Script()
+		@selectbox.Script()
+		@slider.Script()
+		@tabs.Script()
+		@tagsinput.Script()
+		@textarea.Script()
+		@toast.Script()
 		<link rel="stylesheet" href="/assets/css/out/style.css"/>
 		// if os.Getenv("env") == "production" {
 		// 	<link rel="stylesheet" href="/assets/css/style.min.css" nonce={ middleware.GetTwNonce(ctx) }/>
@@ -30,6 +75,9 @@ templ nav() {
 					<a class="text-gray-200" href="#">About</a>
 				</li>
 			</ol>
+			<div class="flex space-x-4">
+				<a class="text-gray-200 hover:text-white" href="/login">Login</a>
+			</div>
 		</div>
 	</nav>
 }
