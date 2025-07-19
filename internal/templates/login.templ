@@ -1,0 +1,90 @@
+package templates
+
+import (
+	"github.com/JacobSchroder/jup/components/button"
+	"github.com/JacobSchroder/jup/components/card"
+	"github.com/JacobSchroder/jup/components/form"
+	"github.com/JacobSchroder/jup/components/input"
+)
+
+templ Login(errorMsg string) {
+	<div class="min-h-[calc(100vh-12rem)] flex items-center justify-center px-4">
+		<div class="w-full max-w-md">
+			@card.Card() {
+				@card.Header() {
+					@card.Title() {
+						Login
+					}
+					@card.Description() {
+						Enter your credentials to access your account
+					}
+				}
+				@card.Content() {
+					if errorMsg != "" {
+						<div class="mb-4 p-3 rounded-md bg-red-50 border border-red-200 dark:bg-red-900/20 dark:border-red-800">
+							<p class="text-sm text-red-600 dark:text-red-400">
+								if errorMsg == "missing_credentials" {
+									Please enter both email and password.
+								} else if errorMsg == "invalid_credentials" {
+									Invalid email or password. Please try again.
+								} else {
+									An error occurred. Please try again.
+								}
+							</p>
+						</div>
+					}
+					<form method="POST" action="/login" class="space-y-4">
+						@form.Item() {
+							@form.Label(form.LabelProps{For: "email"}) {
+								Email
+							}
+							@input.Input(input.Props{
+								ID:          "email",
+								Name:        "email",
+								Type:        input.TypeEmail,
+								Placeholder: "Enter your email",
+								Required:    true,
+							})
+						}
+						@form.Item() {
+							@form.Label(form.LabelProps{For: "password"}) {
+								Password
+							}
+							@input.Input(input.Props{
+								ID:          "password",
+								Name:        "password",
+								Type:        input.TypePassword,
+								Placeholder: "Enter your password",
+								Required:    true,
+							})
+						}
+						<div class="flex items-center justify-between">
+							<label class="flex items-center space-x-2 text-sm">
+								<input type="checkbox" name="remember" class="rounded border-input"/>
+								<span>Remember me</span>
+							</label>
+							<a href="#" class="text-sm text-primary hover:underline">
+								Forgot password?
+							</a>
+						</div>
+						@button.Button(button.Props{
+							Type:      button.TypeSubmit,
+							FullWidth: true,
+							Class:     "mt-6",
+						}) {
+							Sign In
+						}
+					</form>
+				}
+				@card.Footer() {
+					<div class="text-center text-sm text-muted-foreground w-full">
+						Don't have an account?
+						<a href="/register" class="text-primary hover:underline ml-1">
+							Sign up
+						</a>
+					</div>
+				}
+			}
+		</div>
+	</div>
+}
