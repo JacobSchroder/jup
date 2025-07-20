@@ -6,3 +6,5 @@ require (
 	github.com/Oudwins/tailwind-merge-go v0.2.1
 	github.com/a-h/templ v0.3.906
 )
+
+require github.com/gorilla/websocket v1.5.3

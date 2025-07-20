@@ -11,7 +11,7 @@ This project is a **Go web application** using modern web technologies with a fo
 - **Module**: `github.com/JacobSchroder/jup`
 
 ### Frontend & UI
-- **Templ** (`v0.3.833`) - Go templating engine for type-safe HTML components
+- **Templ** (`v0.3.906`) - Go templating engine for type-safe HTML components
 - **Tailwind CSS** (`v4.0.9`) - Utility-first CSS framework with custom theming
 - **TemplUI** - Component library system for Go/Templ (configured via `.templui.json`)
 - **tailwind-merge-go** (`v0.2.1`) - Utility for merging Tailwind CSS classes
@@ -26,10 +26,11 @@ This project is a **Go web application** using modern web technologies with a fo
 ```
 jup/
 ├── cmd/                    # Application entry points
-├── internal/               # Private application code
+├── server/                 # Server setup, handlers, and routing
 │   ├── handlers/          # HTTP request handlers
-│   ├── server/            # Server setup and routing
-│   └── templates/         # Templ templates
+│   └── routes/            # Route definitions
+├── pages/                 # Page-level Templ templates
+├── templates/             # Shared/layout Templ templates
 ├── components/            # Reusable UI components (TemplUI)
 ├── utils/                 # Shared utility functions
 ├── assets/                # Static assets
@@ -77,7 +78,7 @@ jup/
 ## Dependencies
 
 ### Direct Dependencies
-- `github.com/a-h/templ v0.3.833` - Template engine
+- `github.com/a-h/templ v0.3.906` - Template engine
 - `github.com/Oudwins/tailwind-merge-go v0.2.1` - CSS class merging
 
 ### Development Dependencies
