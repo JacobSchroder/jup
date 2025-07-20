@@ -18,6 +18,8 @@ func AddRoutes(
 	mux.HandleFunc("POST /comment", handlers.HandlePostComment)
 	mux.HandleFunc("GET /comment-form", handlers.HandleGetPostCommentForm)
 
+	mux.HandleFunc("POST /issues", handlers.HandlePostIssue)
+
 	fileServer := http.FileServer(http.Dir("assets"))
 	mux.Handle("GET /assets/", http.StripPrefix("/assets/", fileServer))
 }

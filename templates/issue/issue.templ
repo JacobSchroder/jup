@@ -1,0 +1,26 @@
+package issue
+
+import "github.com/JacobSchroder/jup/components/card"
+
+type IssueProps struct {
+	Title       string
+	Description string
+}
+
+templ Issue(props IssueProps) {
+	@card.Card() {
+		@card.Content(card.ContentProps{Class: "p-2"}) {
+			<div class="flex gap-2">
+				<div>X</div>
+				<div>
+					@card.Title() {
+						{ props.Title }
+					}
+					@card.Description() {
+						<p>{ props.Description }</p>
+					}
+				</div>
+			</div>
+		}
+	}
+}
