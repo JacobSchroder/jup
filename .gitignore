@@ -4,4 +4,4 @@ tmp
 tailwindcss
 assets/css/out/**
 **/*_templ.txt
-#**/*_templ.go
+**/*_templ.go
