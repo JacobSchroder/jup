@@ -4,10 +4,10 @@ import (
 	"log/slog"
 	"net/http"
 
-	templates "github.com/JacobSchroder/jup/internal/templates/form"
+	"github.com/JacobSchroder/jup/templates/form"
 )
 
-func HandlePostComment(w http.ResponseWriter, r *http.Request){
+func HandlePostComment(w http.ResponseWriter, r *http.Request) {
 
 	comment := r.PostFormValue("comment")
 

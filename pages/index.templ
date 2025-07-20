@@ -1,0 +1,30 @@
+package pages
+
+import (
+	"github.com/JacobSchroder/jup/components/card"
+	"github.com/JacobSchroder/jup/templates"
+)
+
+templ CommentForm() {
+	<form hx-post="/comment" hx-swap="outerHTML">
+		<input class="bg-slate-700" name="comment" type="text"/>
+		<button type="submit">Sumbit</button>
+	</form>
+}
+
+templ Index() {
+	@templates.Layout(templates.LayoutProps{Title: "Index"}) {
+		<div class="min-h-screen flex items-center justify-center px-4">
+			<div class="w-full max-w-md">
+				@card.Card() {
+					@card.Header() {
+						<h1 class="text-xl">Post a comment</h1>
+					}
+					@card.Content() {
+						@CommentForm()
+					}
+				}
+			</div>
+		</div>
+	}
+}

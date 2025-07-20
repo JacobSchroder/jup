@@ -10,7 +10,7 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/JacobSchroder/jup/internal/server"
+	"github.com/JacobSchroder/jup/server"
 )
 
 const (
@@ -27,7 +27,7 @@ func run(ctx context.Context, w io.Writer) error {
 
 	serv := server.Server()
 	httpServer := &http.Server{
-		Addr: net.JoinHostPort(host, port),
+		Addr:    net.JoinHostPort(host, port),
 		Handler: serv,
 	}
 

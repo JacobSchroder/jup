@@ -1,9 +1,9 @@
-package server
+package routes
 
 import (
 	"net/http"
 
-	"github.com/JacobSchroder/jup/internal/handlers"
+	"github.com/JacobSchroder/jup/server/handlers"
 )
 
 func AddRoutes(

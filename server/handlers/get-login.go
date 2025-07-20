@@ -3,11 +3,11 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/JacobSchroder/jup/internal/templates"
+	"github.com/JacobSchroder/jup/pages"
 )
 
 func HandleGetLogin(w http.ResponseWriter, r *http.Request) {
 	errorMsg := r.URL.Query().Get("error")
-	component := templates.Layout(templates.Login(errorMsg), "Login")
+	component := pages.Login(errorMsg)
 	component.Render(r.Context(), w)
 }

@@ -22,6 +22,7 @@ import (
 	"github.com/JacobSchroder/jup/components/tagsinput"
 	"github.com/JacobSchroder/jup/components/textarea"
 	"github.com/JacobSchroder/jup/components/toast"
+	"github.com/JacobSchroder/jup/utils"
 )
 
 templ header(title string) {
@@ -29,7 +30,8 @@ templ header(title string) {
 		<title>{ title }</title>
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+		<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/htmx-ext-ws@2.0.2" integrity="sha384-vuKxTKv5TX/b3lLzDKP2U363sOAoRo5wSvzzc3LJsbaQRSBSS+3rKKHcOx5J8doU" crossorigin="anonymous"></script>
 		@avatar.Script()
 		@calendar.Script()
 		@carousel.Script()
@@ -60,8 +62,7 @@ templ header(title string) {
 	</head>
 }
 
-templ footer() {
-	<footer class="bg-primary-600 p-4"></footer>
+templ end() {
 	<script>
       // Re-initialize templUI components after HTMX swaps
       document.body.addEventListener("htmx:afterSwap", (e) => {
@@ -110,13 +111,15 @@ templ nav() {
 	</nav>
 }
 
-templ Layout(contents templ.Component, title string) {
-	@header(title)
-	<body class="flex flex-col h-full bg-slate-200 dark:bg-slate-950 text-black dark:text-white">
-		@nav()
-		<main class="flex-1 container">
-			@contents
-		</main>
-		@footer()
+type LayoutProps struct {
+	Title string
+	Class string
+}
+
+templ Layout(props LayoutProps) {
+	@header(props.Title)
+	<body hx-ext="ws" class={ utils.TwMerge("flex flex-col h-full bg-slate-200 dark:bg-slate-950 text-black dark:text-white", props.Class) }>
+		{ children... }
+		@end()
 	</body>
 }
