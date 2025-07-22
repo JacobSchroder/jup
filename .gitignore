@@ -5,3 +5,4 @@ tailwindcss
 assets/css/out/**
 **/*_templ.txt
 **/*_templ.go
+local-data/

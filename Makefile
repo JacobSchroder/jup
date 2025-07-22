@@ -38,6 +38,10 @@ build:
 	make templ-generate
 	go build -ldflags "-X main.Environment=production" -o ./bin/$(APP_NAME) ./cmd/main.go
 
+.PHONY: build-migrate
+build-migrate:
+	go build -o ./bin/migrate ./db/migrate
+
 .PHONY: docker-build
 docker-build:
 	docker-compose -f ./dev/docker-compose.yml build
