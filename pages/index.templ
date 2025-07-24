@@ -17,7 +17,11 @@ templ CommentForm() {
 	</form>
 }
 
-templ Index() {
+type IndexProps struct {
+	Issues []issue.IssueProps
+}
+
+templ Index(props IndexProps) {
 	@templates.Layout(templates.LayoutProps{Title: "Index"}) {
 		<div class="min-h-screen">
 			<nav class="w-full flex justify-between items-center bg-secondary p-2">
@@ -81,8 +85,9 @@ templ Index() {
 			</nav>
 			<div class="h-full flex items-center justify-center px-4">
 				<div class="w-full max-w-md space-y-2" id="issues">
-					@issue.Issue(issue.IssueProps{Title: "First Issue", Description: "This is the first issue"})
-					@issue.Issue(issue.IssueProps{Title: "Second Issue", Description: "This is the second issue"})
+					for _, issueItem := range props.Issues {
+						@issue.Issue(issue.IssueProps{Id: issueItem.Id, Title: issueItem.Title, Description: issueItem.Description})
+					}
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"net/http"
 
-	"github.com/JacobSchroder/jup/templates/form"
+	templates "github.com/JacobSchroder/jup/templates/form"
 )
 
 func HandlePostComment(w http.ResponseWriter, r *http.Request) {

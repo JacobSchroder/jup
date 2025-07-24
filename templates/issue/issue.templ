@@ -5,6 +5,7 @@ import "github.com/JacobSchroder/jup/components/card"
 type IssueProps struct {
 	Title       string
 	Description string
+	Id          string
 }
 
 templ Issue(props IssueProps) {
@@ -18,6 +19,7 @@ templ Issue(props IssueProps) {
 					}
 					@card.Description() {
 						<p>{ props.Description }</p>
+						<small>Id: { props.Id }</small>
 					}
 				</div>
 			</div>
