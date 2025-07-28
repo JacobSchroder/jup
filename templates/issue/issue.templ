@@ -1,6 +1,9 @@
 package issue
 
 import "github.com/JacobSchroder/jup/components/card"
+import "github.com/JacobSchroder/jup/components/icon"
+import "github.com/JacobSchroder/jup/components/button"
+import "strings"
 
 type IssueProps struct {
 	Title       string
@@ -9,10 +12,26 @@ type IssueProps struct {
 }
 
 templ Issue(props IssueProps) {
-	@card.Card() {
+	@card.Card(card.Props{Attributes: templ.Attributes{"id": props.Id}}) {
 		@card.Content(card.ContentProps{Class: "p-2"}) {
 			<div class="flex gap-2">
-				<div>X</div>
+				<div class="min-h-full">
+					@button.Button(button.Props{
+						Size:    button.SizeIcon,
+						Type:    button.TypeButton,
+						Variant: button.VariantGhost,
+						Class:   "my-auto",
+						Attributes: templ.Attributes{
+							/* "hx-on:click": "alert('hello')", */
+							"hx-trigger": "click",
+							"hx-delete":  strings.Join([]string{"/issues", props.Id}, "/"),
+							"hx-target":  "#" + props.Id,
+							"hx-swap":    "outerHTML",
+						},
+					}) {
+						@icon.X()
+					}
+				</div>
 				<div>
 					@card.Title() {
 						{ props.Title }

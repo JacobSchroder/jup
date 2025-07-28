@@ -24,6 +24,7 @@ func AddRoutes(
 	mux.HandleFunc("GET /comment-form", handlers.HandleGetPostCommentForm)
 
 	mux.HandleFunc("POST /issues", handlers.HandlePostIssue(app))
+	mux.HandleFunc("DELETE /issues/{issueId}", handlers.HandleDeleteIssue(app))
 
 	fileServer := http.FileServer(http.Dir("assets"))
 	mux.Handle("GET /assets/", http.StripPrefix("/assets/", fileServer))

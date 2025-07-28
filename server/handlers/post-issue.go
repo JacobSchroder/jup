@@ -2,13 +2,11 @@ package handlers
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 
 	"github.com/JacobSchroder/jup/server/di"
 	"github.com/JacobSchroder/jup/server/utils"
 	"github.com/JacobSchroder/jup/templates/issue"
-	"zombiezen.com/go/sqlite"
 	"zombiezen.com/go/sqlite/sqlitex"
 )
 
@@ -37,10 +35,6 @@ func HandlePostIssue(app *di.App) http.HandlerFunc {
 		defer conn.Close()
 
 		err = sqlitex.ExecuteTransient(conn, "INSERT INTO issues (id, title, description) VALUES (?, ?, ?);", &sqlitex.ExecOptions{
-			ResultFunc: func(stmt *sqlite.Stmt) error {
-				fmt.Println(stmt.ColumnText(0))
-				return nil
-			},
 			Args: []any{id, title, description},
 		})
 
