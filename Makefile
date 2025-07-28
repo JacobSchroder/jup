@@ -28,9 +28,13 @@ templ-watch:
 templ-generate:
 	templ generate
 
+.PHONY: dev-serve
+dev-serve:
+	go build -o ./tmp/main ./cmd/main.go && air
+
 .PHONY: dev
 dev:
-	go build -o ./tmp/main ./cmd/main.go && air
+	make tailwind-watch & make templ-watch & make dev-serve
 
 .PHONY: build
 build:
@@ -52,7 +56,7 @@ docker-up:
 
 .PHONY: docker-dev
 docker-dev:
-	docker-compose -f ./dev/docker-compose.yml -f ./dev/docker-compose.dev.yml up
+	docker-compose -f ./dev/docker-compose.dev.yml up
 
 .PHONY: docker-down
 docker-down:
