@@ -3,6 +3,9 @@ package routes
 import (
 	"net/http"
 
+	page_issues_list "github.com/JacobSchroder/jup/pages/issues-list"
+	page_login "github.com/JacobSchroder/jup/pages/login"
+
 	"github.com/JacobSchroder/jup/server/di"
 	"github.com/JacobSchroder/jup/server/handlers"
 )
@@ -12,9 +15,9 @@ func AddRoutes(
 	app *di.App,
 ) {
 
-	mux.HandleFunc("GET /{$}", handlers.HandleGetIssues(app))
+	mux.HandleFunc("GET /{$}", page_issues_list.HandleGetIssues(app))
 
-	mux.HandleFunc("GET /login", handlers.HandleGetLogin)
+	mux.HandleFunc("GET /login", page_login.HandleGetLogin)
 	mux.HandleFunc("POST /login", handlers.HandlePostLogin)
 
 	mux.HandleFunc("POST /comment", handlers.HandlePostComment)

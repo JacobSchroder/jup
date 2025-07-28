@@ -1,4 +1,4 @@
-package pages
+package page_issues_list
 
 import (
 	"github.com/JacobSchroder/jup/components/button"
@@ -17,11 +17,11 @@ templ CommentForm() {
 	</form>
 }
 
-type IndexProps struct {
+type IssuesListProps struct {
 	Issues []issue.IssueProps
 }
 
-templ Index(props IndexProps) {
+templ IssuesList(props IssuesListProps) {
 	@templates.Layout(templates.LayoutProps{Title: "Index"}) {
 		<div class="min-h-screen">
 			<nav class="w-full flex justify-between items-center bg-secondary p-2">

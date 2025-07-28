@@ -1,10 +1,8 @@
-package handlers
+package page_issues_list
 
 import (
-	"fmt"
 	"net/http"
 
-	"github.com/JacobSchroder/jup/pages"
 	"github.com/JacobSchroder/jup/server/di"
 	"github.com/JacobSchroder/jup/templates/issue"
 	"zombiezen.com/go/sqlite"
@@ -27,13 +25,12 @@ func HandleGetIssues(app *di.App) http.HandlerFunc {
 				id := stmt.ColumnText(0)
 				title := stmt.ColumnText(1)
 				description := stmt.ColumnText(2)
-				fmt.Printf("ID: %s, Title: %s, Description: %s\n", id, title, description)
 				issues = append(issues, issue.IssueProps{Id: id, Title: title, Description: description})
 				return nil
 			},
 		})
 
-		err = pages.Index(pages.IndexProps{Issues: issues}).Render(r.Context(), w)
+		err = IssuesList(IssuesListProps{Issues: issues}).Render(r.Context(), w)
 
 	}
 }
