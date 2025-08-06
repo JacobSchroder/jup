@@ -1,0 +1,76 @@
+package issue
+
+import (
+	"github.com/JacobSchroder/jup/components/button"
+	"github.com/JacobSchroder/jup/components/form"
+	"github.com/JacobSchroder/jup/components/input"
+	"github.com/JacobSchroder/jup/components/modal"
+	"github.com/JacobSchroder/jup/components/textarea"
+)
+
+type CreateIssueModalTriggerProps struct {
+	Attributes templ.Attributes
+}
+
+templ CreateIssueModalTrigger(props CreateIssueModalTriggerProps) {
+	@modal.Trigger(modal.TriggerProps{
+		ID:         "create-issue-modal-trigger",
+		For:        "create-issue-modal",
+		Attributes: props.Attributes,
+	}) {
+		@button.Button(button.Props{
+			Variant: "default",
+			Size:    "lg",
+		}) {
+			New issue
+		}
+	}
+}
+
+type CreateIssueFormProps struct {
+	Attributes templ.Attributes
+}
+
+templ CreateIssueForm(props CreateIssueFormProps) {
+	@modal.Modal(modal.Props{
+		ID:         "create-issue-modal",
+		Class:      "max-w-md",
+		Attributes: props.Attributes,
+	}) {
+		// TODO: reset form values on success
+		<form hx-post="/issues" hx-swap="beforeend" hx-target="#issues">
+			@modal.Header() {
+				New issue
+			}
+			@modal.Body() {
+				@form.Item() {
+					@form.Label(form.LabelProps{For: "new-issue-title"}) {
+						Title
+					}
+					@input.Input(input.Props{ID: "new-issue-title", Name: "title"}) {
+					}
+					@form.Label(form.LabelProps{For: "new-issue-description"}) {
+						Description
+					}
+					@textarea.Textarea(textarea.Props{ID: "new-issue-description", Name: "description", Placeholder: "Enter description"})
+				}
+			}
+			@modal.Footer() {
+				<div class="flex gap-2">
+					@modal.Close(modal.CloseProps{
+						For: "create-issue-modal",
+					}) {
+						@button.Button(button.Props{
+							Variant: button.VariantSecondary,
+						}) {
+							Cancel
+						}
+					}
+					@button.Button(button.Props{Type: button.TypeSubmit}) {
+						Create
+					}
+				</div>
+			}
+		</form>
+	}
+}

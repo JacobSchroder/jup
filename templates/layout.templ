@@ -80,6 +80,7 @@ templ end() {
         if (window.templUI) {
           Object.values(window.templUI).forEach(comp => {
             comp.init?.(e.detail.target);
+            window.templUI.modal.init()
           });
         }
       });

@@ -22,11 +22,10 @@ templ Issue(props IssueProps) {
 						Variant: button.VariantGhost,
 						Class:   "my-auto",
 						Attributes: templ.Attributes{
-							/* "hx-on:click": "alert('hello')", */
 							"hx-trigger": "click",
 							"hx-delete":  strings.Join([]string{"/issues", props.Id}, "/"),
 							"hx-target":  "#" + props.Id,
-							"hx-swap":    "outerHTML",
+							"hx-swap":    "delete",
 						},
 					}) {
 						@icon.X()

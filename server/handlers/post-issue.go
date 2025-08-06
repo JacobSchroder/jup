@@ -1,12 +1,12 @@
 package handlers
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/JacobSchroder/jup/server/di"
 	"github.com/JacobSchroder/jup/server/utils"
 	"github.com/JacobSchroder/jup/templates/issue"
+	"github.com/a-h/templ"
 	"zombiezen.com/go/sqlite/sqlitex"
 )
 
@@ -27,7 +27,7 @@ func HandlePostIssue(app *di.App) http.HandlerFunc {
 			return
 		}
 
-		conn, err := app.DB.Take(context.TODO())
+		conn, err := app.DB.Take(r.Context())
 		if err != nil {
 			http.Error(w, "Unable to connect to database", http.StatusInternalServerError)
 			return
@@ -48,5 +48,17 @@ func HandlePostIssue(app *di.App) http.HandlerFunc {
 			http.Error(w, "Error rendering template", http.StatusInternalServerError)
 			return
 		}
+
+		err = issue.CreateIssueForm(issue.CreateIssueFormProps{Attributes: templ.Attributes{"hx-swap-oob": "true"}}).Render(r.Context(), w)
+		if err != nil {
+			http.Error(w, "Error rendering template", http.StatusInternalServerError)
+			return
+		}
+
+		// err = issue.CreateIssueModalTrigger(issue.CreateIssueModalTriggerProps{Attributes: templ.Attributes{"hx-swap-oob": "true"}}).Render(r.Context(), w)
+		// if err != nil {
+		// 	http.Error(w, "Error rendering template", http.StatusInternalServerError)
+		// 	return
+		// }
 	}
 }

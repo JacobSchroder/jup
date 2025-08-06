@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/JacobSchroder/jup/server/di"
@@ -13,7 +12,7 @@ func HandleDeleteIssue(app *di.App) http.HandlerFunc {
 
 		id := r.PathValue("issueId")
 
-		conn, err := app.DB.Take(context.TODO())
+		conn, err := app.DB.Take(r.Context())
 		if err != nil {
 			http.Error(w, "Unable to connect to database", http.StatusInternalServerError)
 			return

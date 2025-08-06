@@ -8,11 +8,14 @@ import (
 )
 
 func NewConnectionPool() (*sqlitex.Pool, error) {
-	return sqlitex.NewPool("local-data/app.db", sqlitex.PoolOptions{})
+	return sqlitex.NewPool("local-data/app.db", sqlitex.PoolOptions{
+		PoolSize: 10,
+		Flags:    sqlite.OpenReadWrite | sqlite.OpenCreate | sqlite.OpenWAL,
+	})
 }
 
-func GetConnection(pool *sqlitex.Pool) (*sqlite.Conn, error) {
-	return pool.Take(context.TODO())
+func GetConnection(pool *sqlitex.Pool, ctx context.Context) (*sqlite.Conn, error) {
+	return pool.Take(ctx)
 }
 
 func PutConnection(pool *sqlitex.Pool, conn *sqlite.Conn) {
