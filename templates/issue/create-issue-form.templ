@@ -1,6 +1,7 @@
 package issue
 
 import (
+	"fmt"
 	"github.com/JacobSchroder/jup/components/button"
 	"github.com/JacobSchroder/jup/components/form"
 	"github.com/JacobSchroder/jup/components/input"
@@ -12,10 +13,14 @@ type CreateIssueModalTriggerProps struct {
 	Attributes templ.Attributes
 }
 
+const CreateIssueModalCloseButtonID = "create-issue-modal-close-btn"
+const CreateIssueModalID = "create-issue-modal"
+const CreateIssueModalTriggerID = "create-issue-modal-trigger"
+
 templ CreateIssueModalTrigger(props CreateIssueModalTriggerProps) {
 	@modal.Trigger(modal.TriggerProps{
-		ID:         "create-issue-modal-trigger",
-		For:        "create-issue-modal",
+		ID:         CreateIssueModalTriggerID,
+		For:        CreateIssueModalID,
 		Attributes: props.Attributes,
 	}) {
 		@button.Button(button.Props{
@@ -31,14 +36,21 @@ type CreateIssueFormProps struct {
 	Attributes templ.Attributes
 }
 
+var afterCreateIssue = fmt.Sprintf("if (event.detail.successful) { this.reset(); document.getElementById('%s').click(); }", CreateIssueModalCloseButtonID)
+
 templ CreateIssueForm(props CreateIssueFormProps) {
+	<script>
+	 function closeCreateIssueModal() {
+		document.getElementById({{ CreateIssueModalCloseButtonID }}).click();
+	 }
+	</script>
 	@modal.Modal(modal.Props{
-		ID:         "create-issue-modal",
+		ID:         CreateIssueModalID,
 		Class:      "max-w-md",
 		Attributes: props.Attributes,
 	}) {
 		// TODO: reset form values on success
-		<form hx-post="/issues" hx-swap="beforeend" hx-target="#issues">
+		<form hx-post="/issues" hx-swap="beforeend" hx-target="#issues" hx-on::after-request="if (event.detail.successful) { this.reset();  closeCreateIssueModal();}">
 			@modal.Header() {
 				New issue
 			}
@@ -58,7 +70,8 @@ templ CreateIssueForm(props CreateIssueFormProps) {
 			@modal.Footer() {
 				<div class="flex gap-2">
 					@modal.Close(modal.CloseProps{
-						For: "create-issue-modal",
+						For: CreateIssueModalID,
+						ID:  CreateIssueModalCloseButtonID,
 					}) {
 						@button.Button(button.Props{
 							Variant: button.VariantSecondary,
