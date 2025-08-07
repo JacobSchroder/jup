@@ -12,14 +12,16 @@ type IssuesListProps struct {
 templ IssuesList(props IssuesListProps) {
 	@templates.Layout(templates.LayoutProps{Title: "Index"}) {
 		<div class="min-h-screen">
-			<nav class="w-full flex justify-between items-center bg-secondary p-2">
-				<div></div>
-				<div>
-					@issue.CreateIssueModalTrigger(issue.CreateIssueModalTriggerProps{})
-					@issue.CreateIssueForm(issue.CreateIssueFormProps{})
+			<nav class="w-full bg-secondary p-2">
+				<div class="w-full container flex justify-between items-center mx-auto">
+					<div></div>
+					<div>
+						@issue.CreateIssueModalTrigger(issue.CreateIssueModalTriggerProps{})
+						@issue.CreateIssueForm(issue.CreateIssueFormProps{})
+					</div>
 				</div>
 			</nav>
-			<div class="h-full flex items-center justify-center px-4">
+			<div class="flex items-center justify-center px-4">
 				<div class="w-full max-w-md space-y-2" id="issues">
 					for _, issueItem := range props.Issues {
 						@issue.Issue(issue.IssueProps{Id: issueItem.Id, Title: issueItem.Title, Description: issueItem.Description})

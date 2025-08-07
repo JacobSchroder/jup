@@ -5,6 +5,7 @@ import (
 
 	"github.com/JacobSchroder/jup/db/dbconn"
 	"github.com/JacobSchroder/jup/server/di"
+	"github.com/JacobSchroder/jup/server/handlers"
 	"github.com/JacobSchroder/jup/server/routes"
 )
 
@@ -20,7 +21,13 @@ func Server() http.Handler {
 		panic(err)
 	}
 
-	app := &di.App{DB: pool}
+	// Initialize WebSocket handler
+	wsHandler := handlers.NewWebSocketHandler(&di.App{DB: pool})
+	
+	app := &di.App{
+		DB: pool,
+		WebSocketHandler: wsHandler,
+	}
 
 	routes.AddRoutes(mux, app)
 	var handler http.Handler = mux

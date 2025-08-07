@@ -6,4 +6,5 @@ import (
 
 type App struct {
 	DB *sqlitex.Pool
+	WebSocketHandler interface{}
 }
