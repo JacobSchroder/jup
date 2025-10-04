@@ -5,6 +5,6 @@ import (
 )
 
 type App struct {
-	DB *sqlitex.Pool
-	WebSocketHandler interface{}
+	DB               *sqlitex.Pool
+	WebSocketHandler any
 }

@@ -50,7 +50,13 @@ templ CreateIssueForm(props CreateIssueFormProps) {
 		Attributes: props.Attributes,
 	}) {
 		// TODO: reset form values on success
-		<form hx-post="/issues" hx-swap="beforeend" hx-target="#issues" hx-on::after-request="if (event.detail.successful) { this.reset();  closeCreateIssueModal();}">
+		<form
+			hx-post="/issues"
+			hx-swap="beforeend"
+			hx-target="#issues"
+			_="on submit log 'submitting'"
+			hx-on::after-request="if (event.detail.successful) { this.reset();}"
+		>
 			@modal.Header() {
 				New issue
 			}

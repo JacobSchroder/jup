@@ -1,0 +1,101 @@
+<script>
+    function closeCreateIssueModal() {
+    document.getElementById({{ CreateIssueModalCloseButtonID }}).click();
+    }
+</script>
+<div
+    id="create-issue-modal"
+    data-modal=""
+    data-open="true"
+    class="modal-container fixed inset-0 z-50 items-center justify-center overflow-y-auto transition-opacity duration-300 ease-out hidden opacity-0 [data-open='true']:opacity-100"
+    aria-labelledby="create-issue-modal-title"
+    role="dialog"
+    aria-modal="true"
+    data-initialized="true"
+    style="display: flex"
+>
+    <div
+        data-modal-backdrop=""
+        class="fixed inset-0 bg-background/70 bg-opacity-50"
+        aria-hidden="true"
+    ></div>
+    <div
+        id="create-issue-modal-content"
+        data-modal-content=""
+        class="modal-content transform text-left overflow-hidden bg-background border transition-all rounded-lg duration-300 max-w-md ease-out relative w-full shadow-xl sm:my-8 scale-100 opacity-100"
+    >
+        <form
+            hx-post="/issues"
+            hx-swap="beforeend"
+            hx-target="#issues"
+            _="on submit log 'submitting'"
+            hx-on::after-request="if (event.detail.successful) { this.reset();}"
+            class=""
+        >
+            <div
+                class="sm:p-6 sm:pb-4 text-lg font-medium text-foreground px-4 leading-6 pt-5 pb-4"
+            >
+                <h3
+                    class="text-lg leading-6 font-medium text-foreground"
+                    id="-title"
+                >
+                    New issue
+                </h3>
+            </div>
+            <div class="pb-4 sm:p-6 sm:pb-4 px-4 pt-5">
+                <div class="space-y-2">
+                    <label
+                        for="new-issue-title"
+                        class="leading-none font-medium inline-block text-sm"
+                        data-disabled-style="opacity-50 cursor-not-allowed"
+                        data-initialized="true"
+                        >Title</label
+                    >
+                    <div class="relative w-full">
+                        <input
+                            id="new-issue-title"
+                            type="text"
+                            name="title"
+                            class="transition-[color,box-shadow] file:border-0 text-base min-w-0 py-1 focus-visible:ring-ring/50 border bg-transparent dark:bg-input/30 selection:text-primary-foreground file:text-sm aria-invalid:ring-destructive/20 h-9 w-full border-input md:text-sm file:font-medium disabled:cursor-not-allowed disabled:opacity-50 dark:aria-invalid:ring-destructive/40 rounded-md shadow-xs placeholder:text-muted-foreground aria-invalid:border-destructive file:inline-flex file:bg-transparent file:h-7 file:text-foreground focus-visible:border-ring flex selection:bg-primary disabled:pointer-events-none px-3 outline-none focus-visible:ring-[3px]"
+                        />
+                    </div>
+                    <label
+                        for="new-issue-description"
+                        class="leading-none font-medium inline-block text-sm"
+                        data-disabled-style="opacity-50 cursor-not-allowed"
+                        data-initialized="true"
+                        >Description</label
+                    >
+                    <textarea
+                        id="new-issue-description"
+                        data-textarea=""
+                        name="description"
+                        placeholder="Enter description"
+                        class="min-w-0 disabled:opacity-50 dark:aria-invalid:ring-destructive/40 outline-none bg-transparent shadow-xs selection:text-primary-foreground focus-visible:ring-ring/50 disabled:cursor-not-allowed min-h-[80px] disabled:pointer-events-none border text-base aria-invalid:border-destructive dark:bg-input/30 focus-visible:ring-[3px] md:text-sm aria-invalid:ring-destructive/20 selection:bg-primary flex focus-visible:border-ring px-3 transition-[color,box-shadow] placeholder:text-muted-foreground w-full rounded-md border-input py-1"
+                        data-initialized="true"
+                    ></textarea>
+                </div>
+            </div>
+            <div class="sm:flex sm:flex-row-reverse px-4 py-3 sm:px-6">
+                <div class="flex gap-2">
+                    <span
+                        id="create-issue-modal-close-btn"
+                        data-modal-close="create-issue-modal"
+                        class="cursor-pointer"
+                        ><button
+                            class="dark:aria-invalid:ring-destructive/40 cursor-pointer bg-secondary text-secondary-foreground items-center shadow-xs outline-none aria-invalid:ring-destructive/20 [&amp;_svg]:pointer-events-none focus-visible:border-ring [&amp;_svg]:shrink-0 hover:bg-secondary/80 font-medium [&amp;_svg:not([class*='size-'])]:size-4 inline-flex focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all py-2 justify-center px-4 text-sm h-9 has-[&gt;svg]:px-3 rounded-md disabled:pointer-events-none shrink-0 aria-invalid:border-destructive gap-2 whitespace-nowrap disabled:opacity-50"
+                            type="button"
+                        >
+                            Cancel
+                        </button></span
+                    ><button
+                        class="h-9 rounded-md focus-visible:ring-ring/50 px-4 inline-flex gap-2 text-sm dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive disabled:opacity-50 whitespace-nowrap [&amp;_svg]:pointer-events-none hover:bg-primary/90 focus-visible:ring-[3px] shadow-xs py-2 shrink-0 [&amp;_svg]:shrink-0 aria-invalid:ring-destructive/20 bg-primary items-center outline-none text-primary-foreground focus-visible:border-ring font-medium disabled:pointer-events-none has-[&gt;svg]:px-3 justify-center transition-all [&amp;_svg:not([class*='size-'])]:size-4 cursor-pointer"
+                        type="submit"
+                    >
+                        Create
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -32,10 +32,6 @@ templ-generate:
 dev-serve:
 	go build -o ./tmp/main ./cmd/main.go && air
 
-.PHONY: dev
-dev:
-	make tailwind-watch & make templ-watch & make dev-serve
-
 .PHONY: build
 build:
 	make tailwind-build
